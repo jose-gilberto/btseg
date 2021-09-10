@@ -2,6 +2,15 @@ import cv2
 import numpy as np
 
 
+class SegmentExtraction:
+    
+    def __init__(self, segment_number: int):
+        pass
+
+    def __call__(self, img):
+        pass
+
+
 class MinimumBoundingBox:
 
     def __init__(self, padding: int):
