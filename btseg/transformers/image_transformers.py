@@ -46,4 +46,53 @@ class Resize:
                 y_i = (self.g_measure * y) / x
                 return cv2.resize(image, (x_i, y_i))
 
-        return cv2.resize(image, (self.g_measure, self.g_measure)) 
+        return cv2.resize(image, (self.g_measure, self.g_measure))
+
+
+class ConvertColor:
+
+    def __init__(self, conversion_code) -> None:
+        self.conversion_code = conversion_code
+    
+    def __call__(self, image):
+        return cv2.cvtColor(image, self.conversion_code)
+
+
+class GaussianBlur:
+
+    def __init__(self, kernel_size, sigma_x) -> None:
+        self.ksize = kernel_size
+        self.sigma_x = sigma_x
+
+    def __call__(self, image):
+        return cv2.GaussianBlur(image, self.ksize, self.sigma_x)
+
+
+class CannyEdge:
+
+    def __init__(self, threshold_1, threshold_2) -> None:
+        self.t1 = threshold_1
+        self.t2 = threshold_2
+
+    def __call__(self, image):
+        return cv2.Canny(image, self.t1, self.t2)
+
+
+class Dilate:
+
+    def __init__(self, kernel, iterations) -> None:
+        self.kernel = kernel
+        self.iterations = iterations
+
+    def __call__(self, image):
+        return cv2.dilate(image, self.kernel, iterations=self.iterations)
+
+
+class Erode:
+
+    def __init__(self, kernel, iterations) -> None:
+        self.kernel = kernel
+        self.iterations = iterations
+
+    def __call__(self, image):
+        return cv2.erode(image, self.kernel, self.iterations)
