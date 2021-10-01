@@ -13,7 +13,7 @@ class SegmentExtraction:
 
 class MinimumBoundingBox:
 
-    def __init__(self, padding: int):
+    def __init__(self, padding: int = 0):
         self.p = padding # TODO: implement padding
 
     def __call__(self, image):
@@ -39,12 +39,13 @@ class Resize:
             if x < y:
                 y_i = self.g_measure
                 x_i = (self.g_measure * x) / y
-                return cv2.resize(image, (x_i, y_i))
+                print(y_i, x_i)
+                return cv2.resize(image, dsize=(int(x_i), int(y_i)))
             
             if x > y:
                 x_i = self.g_measure
                 y_i = (self.g_measure * y) / x
-                return cv2.resize(image, (x_i, y_i))
+                return cv2.resize(image, dsize=(int(x_i), int(y_i)))
 
         return cv2.resize(image, (self.g_measure, self.g_measure))
 
@@ -96,3 +97,13 @@ class Erode:
 
     def __call__(self, image):
         return cv2.erode(image, self.kernel, self.iterations)
+
+
+class RegionSelection:
+
+    def __init__(self, region) -> None:
+        self.r = region
+    
+    def __call__(self, image):
+        if self.r == 1:
+            return np.where(image > 0, 64, image)
