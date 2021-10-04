@@ -39,7 +39,6 @@ class Resize:
             if x < y:
                 y_i = self.g_measure
                 x_i = (self.g_measure * x) / y
-                print(y_i, x_i)
                 return cv2.resize(image, dsize=(int(x_i), int(y_i)))
             
             if x > y:
