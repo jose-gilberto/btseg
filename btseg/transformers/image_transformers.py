@@ -27,6 +27,14 @@ class MinimumBoundingBox:
 
 
 class Resize:
+    """Based on interpolation technique, applies a resize transformation
+    in a given image.
+
+    Args:
+        proportion_scale: A boolean indicating whitch type of resize will be used. If true
+                          the algorithms applies a proportion calc to preserve the image scale.
+        g_measure: The size of the biggest dimension of the image, width or height.
+    """
 
     def __init__(self, proportion_scale: bool, g_measure: int):
         self.proportion_scale = proportion_scale
@@ -50,6 +58,15 @@ class Resize:
 
 
 class ConvertColor:
+    """Converts an image from one color space to another.
+
+    The function converts an input image from one color space to another. In case
+    of a transformation to-from RGB color space, the order of channels should be
+    specified explicity (RGB or BGR).
+
+    Args:
+        conversion_code: The conversion code to apply in this image.
+    """
 
     def __init__(self, conversion_code) -> None:
         self.conversion_code = conversion_code
