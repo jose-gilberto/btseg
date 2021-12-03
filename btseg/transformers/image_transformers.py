@@ -1,3 +1,10 @@
+"""
+This module was built using the Chain of Responsibility design pattern. 
+Where Compose is responsible for managing a chain of transformations execution.
+
+Here are only transformations applied to images.
+"""
+
 import cv2
 import numpy as np
 
@@ -123,3 +130,9 @@ class RegionSelection:
     def __call__(self, image):
         if self.r == 1:
             return np.where(image > 0, 64, image)
+        elif self.r == 2:
+            image = np.where(image == 127, 0, image)
+            return np.where(image == 255, 64, image)
+        elif self.r == 3:
+            image = np.where(image != 64, 0, image)
+            return image
