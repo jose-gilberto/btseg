@@ -1,7 +1,8 @@
 from glob import glob
 from btseg.transformers.nii_transformers import NiiToImage
-from btseg.util.save_image import save_image_as_png
+from btseg.utils.save_image import save_image_as_png
 import os
+
 
 class NiiFilesProcessor:
 
